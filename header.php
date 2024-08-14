@@ -15,7 +15,7 @@
             <span>Admin Dashboard</span>
         </div>
         <a href="dashboard_admin.php">Dashboard</a>
-        <a href="#">Users</a>
+        <a href="insert_data.php">เพิ่มข้อมูล</a>
         <a href="#">Reports</a>
         <a href="#">Settings</a>
         <a href="logout.php">Logout</a>
