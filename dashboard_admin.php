@@ -5,21 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles/dashboard_styles.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="css/dashboard_styles.css" rel="stylesheet">
 </head>
 <body>
-    <div class="sidebar">
-        <div class="brand">
-            <img src="https://via.placeholder.com/30" alt="Logo">
-            <span>Admin Dashboard</span>
-        </div>
-        <a href="#">Dashboard</a>
-        <a href="#">Users</a>
-        <a href="#">Reports</a>
-        <a href="#">Settings</a>
-        <a href="logout.php">Logout</a>
-    </div>
+    <?php include 'header.php'; ?>
     
     <div class="main-content">
         <h1 class="mb-4">Dashboard Overview</h1>
@@ -92,6 +82,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="scripts/dashboard_scripts.js"></script>
+    <script src="js/dashboard_scripts.js"></script>
 </body>
 </html>
