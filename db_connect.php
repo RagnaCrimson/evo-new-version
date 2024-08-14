@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "datastore_db";
+$dbname = "db_evo";
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 

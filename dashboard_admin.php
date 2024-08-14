@@ -4,15 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
     <link href="styles/dashboard_styles.css" rel="stylesheet">
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <!-- Sidebar -->
     <div class="sidebar">
         <div class="brand">
             <img src="https://via.placeholder.com/30" alt="Logo">
@@ -22,14 +18,12 @@
         <a href="#">Users</a>
         <a href="#">Reports</a>
         <a href="#">Settings</a>
-        <a href="#">Logout</a>
+        <a href="logout.php">Logout</a>
     </div>
     
-    <!-- Main Content -->
     <div class="main-content">
         <h1 class="mb-4">Dashboard Overview</h1>
         
-        <!-- Top Data Boxes -->
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
@@ -57,7 +51,6 @@
             </div>
         </div>
         
-        <!-- Pie Charts -->
         <div class="row chart-container">
             <div class="col-md-6">
                 <div class="card">
@@ -96,11 +89,9 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Custom JS -->
     <script src="scripts/dashboard_scripts.js"></script>
 </body>
 </html>
