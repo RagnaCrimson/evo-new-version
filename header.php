@@ -2,9 +2,6 @@
 session_start();
 
 include 'connect.php';
-// require_once 'session.php';
-
-// check_login();
 
 $username = $_SESSION['username'];
 $sql = "SELECT Name FROM admin WHERE UserName='$username'";
@@ -25,33 +22,61 @@ $objConnect->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Header</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard_styles.css" rel="stylesheet">
+    <link href="css/custom-select.css" rel="stylesheet">
     <script src="js/logout.js"></script>
 </head>
 <body>
     <div class="sidebar">
         <div class="brand">
-            <img src="img/admin.png" alt="Logo">
+            <img src="../img/admin.png" alt="Logo">
             <span><?php echo $_SESSION['name']; ?></a></span>
         </div>
         <a href="dashboard_admin.php">Dashboard</a>
-        <a a href="#">รายการ &dtrif;</a>
-            <ul class="dropdown">
-                <li><a href="../data_view.php">ดูข้อมูลทั้งหมด</a></li>
-                <li><a href="../index.php">เพิ่มข้อมูล</a></li>
-                <li><a href="../status_view.php">ดูสถานะ</a></li>
-            </ul>
-        <a href="#">Report &dtrif;</a>
-            <ul class="dropdown">
-                <li><a href="report/reportday.php">เลือกวันที่</a></li>
-                <li><a href="report/allname.php" target="_blank">รายชื่อทั้งหมด</a></li>
-                <li><a href="report/sale_name.php">เลือกทีมฝ่ายขาย</a></li>
-                <!-- <li><a href="#">ตามสถานะ</a></li>
-                <li><a href="#">บริษัทผู้รับเหมา</a></li> -->
-            </ul>    
+
+        <div class="dropdown">
+            <button class="dropdown-btn">รายการ 
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="list/data_view.php">ดูข้อมูลทั้งหมด</a>
+                <a href="list/insert_data.php">เพิ่มข้อมูล</a>
+                <a href="list/status_view.php">ดูสถานะ</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropdown-btn">Report 
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="report/reportday.php">เลือกวันที่</a>
+                <a href="report/allname.php" target="_blank">รายชื่อทั้งหมด</a>
+                <a href="report/sale_name.php">เลือกทีมฝ่ายขาย</a>
+            </div>
+        </div>
+
         <a onclick="confirmLogout()">ลงชื่ออก</a>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var dropdown = document.querySelectorAll(".dropdown-btn");
+            
+            dropdown.forEach(function(btn) {
+                btn.addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
