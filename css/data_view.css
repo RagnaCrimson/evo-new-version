@@ -8,7 +8,7 @@
 /* Body and container styling */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f0f0f0;
+    background-color: #23889e;
     color: #333;
     line-height: 1.6;
     display: flex;
@@ -18,7 +18,7 @@ body {
 
 .container {
     flex: 1;
-    max-width: calc(100% - 250px); /* Adjust width to account for sidebar */
+    max-width: calc(100% - 250px);
     margin: 20px auto;
     padding: 20px;
     background: #fff;
@@ -29,11 +29,12 @@ body {
 header {
     text-align: center;
     margin-bottom: 30px;
+    width: 120%;
 }
 
 /* Table styling */
 .data-table {
-    width: 100%; /* Adjust to fit within container */
+    width: 120%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
@@ -117,3 +118,35 @@ footer {
     text-align: center;
     width: 100%;
 }
+
+/* search */
+.search-container {
+    margin-bottom: 20px;
+}
+
+.search-container form {
+    display: flex;
+    align-items: center;
+}
+
+.search-container input[type="text"] {
+    padding: 8px;
+    margin-right: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 400px;
+}
+
+.search-container button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #0056b3;
+}
+

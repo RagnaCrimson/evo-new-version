@@ -5,6 +5,7 @@ $password = "";
 $dbname = "datastore_db";
 
 try {
+    // Establish the database connection
     $objConnect = new mysqli($servername, $username, $password, $dbname);
 
     if ($objConnect->connect_error) {
@@ -13,13 +14,25 @@ try {
 
     $objConnect->set_charset("utf8");
 
+    // Fetch search query
+    $search_query = isset($_GET['search']) ? trim($_GET['search']) : '';
+
+    // Prepare SQL query with search condition
+    $sql = "SELECT * FROM view WHERE V_Name LIKE ? OR V_Province LIKE ?";
+    $stmt = $objConnect->prepare($sql);
+    $search_param = "%{$search_query}%";
+    $stmt->bind_param('ss', $search_param, $search_param);
+    $stmt->execute();
+    $resultdatastore_db = $stmt->get_result();
+
     // Pagination setup
     $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
     $rows_per_page = 20;
     $offset = ($page - 1) * $rows_per_page;
 
     // Prepare SQL for total rows
-    $stmt_total = $objConnect->prepare("SELECT COUNT(*) AS total FROM view");
+    $stmt_total = $objConnect->prepare("SELECT COUNT(*) AS total FROM view WHERE V_Name LIKE ? OR V_Province LIKE ?");
+    $stmt_total->bind_param('ss', $search_param, $search_param);
     $stmt_total->execute();
     $result_total = $stmt_total->get_result();
     $row_total = $result_total->fetch_assoc();
@@ -27,9 +40,14 @@ try {
 
     $total_pages = ceil($total_rows / $rows_per_page);
 
-    // Prepare SQL for data
-    $stmt_data = $objConnect->prepare("SELECT view.*, files.filename, peak.serial_number, peak.CA_code FROM view LEFT JOIN files ON view.V_ID = files.ID LEFT JOIN peak ON view.V_ID = peak.V_ID LIMIT ?, ?");
-    $stmt_data->bind_param("ii", $offset, $rows_per_page);
+    // Prepare SQL for data with pagination
+    $stmt_data = $objConnect->prepare("SELECT view.*, files.filename, peak.serial_number, peak.CA_code 
+                                       FROM view 
+                                       LEFT JOIN files ON view.V_ID = files.ID 
+                                       LEFT JOIN peak ON view.V_ID = peak.V_ID 
+                                       WHERE V_Name LIKE ? OR V_Province LIKE ? 
+                                       LIMIT ?, ?");
+    $stmt_data->bind_param("ssii", $search_param, $search_param, $offset, $rows_per_page);
     $stmt_data->execute();
     $resultdatastore_db = $stmt_data->get_result();
 

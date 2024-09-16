@@ -12,7 +12,7 @@
     <div class="row chart-container">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Chart 1</div>
+                <div class="card-header">สถานะงาน</div>
                 <div class="card-body">
                     <canvas id="pieChart1"></canvas>
                 </div>
@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">efficiency Chart</div>
+                <div class="card-header">หน่วยงานที่มีศักยภาพ</div>
                 <div class="card-body">
                     <canvas id="efficiency-chart"></canvas>
                 </div>
@@ -28,7 +28,7 @@
         </div>
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Chart 2</div>
+                <div class="card-header">ค่า Peak ต่อเดือน</div>
                 <div class="card-body">
                     <canvas id="pieChart2"></canvas>
                 </div>
@@ -36,7 +36,7 @@
         </div>
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Chart 3</div>
+                <div class="card-header">ค่าไฟต่อปี</div>
                 <div class="card-body">
                     <canvas id="pieChart3"></canvas>
                 </div>
@@ -44,9 +44,17 @@
         </div>
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Chart 4</div>
+                <div class="card-header">ค่าไฟต่อเดือน</div>
                 <div class="card-body">
                     <canvas id="pieChart4"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">ค่าไฟต่อเดือน</div>
+                <div class="card-body">
+                    <canvas id="pieChart5"></canvas>
                 </div>
             </div>
         </div>
@@ -309,6 +317,55 @@
                         textAlign: 'center',
                         textAnchor: 'middle'
                     }
+                }
+            }
+        });
+
+        const regionLabels = <?php echo $region_labels_json; ?>;
+        const regionCounts = <?php echo $region_counts_json; ?>;
+        
+        const ctxRegionPie = document.getElementById('pieChart5').getContext('2d');
+        const regionPieChart = new Chart(ctxRegionPie, {
+            type: 'doughnut',
+            data: {
+                labels: regionLabels,
+                datasets: [{
+                    label: 'Regions',
+                    data: regionCounts,
+                    backgroundColor: [
+                        '#FF6384', '#36A2EB', '#FFCE56', '#FF5733', '#C70039', '#900C3F'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                onClick: (event, elements) => {
+                    if (elements.length > 0) {
+                        const segmentIndex = elements[0].index;
+                        const label = regionPieChart.data.labels[segmentIndex];
+                        window.location.href = `details/details_region.php?region=${encodeURIComponent(label)}`;
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'ภูมิภาค'
+                    },
+                    datalabels: {
+                        display: (context) => {
+                            return context.dataset.data[context.dataIndex] > 20;
+                        },
+                        color: '#fff',
+                        font: {
+                            weight: 'bold',
+                            size: 14
+                        },
+                        anchor: 'center',
+                        align: 'center',
+                        padding: {
+                            bottom: 5
+                        }
+                    },
                 }
             }
         });

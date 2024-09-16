@@ -17,8 +17,14 @@
         <header>
             <h1>ข้อมูลของหน่วยงาน</h1>
         </header>
-        
+
         <main>
+            <div class="search-container">
+                <form method="get" action="">
+                    <input type="text" name="search" placeholder="ค้นหาหน่วยงาน..." value="<?php echo htmlspecialchars($search_query); ?>">
+                    <button type="submit">ค้นหา</button>
+                </form>
+            </div>
             <table class="data-table">
                 <thead>
                     <tr>
@@ -75,7 +81,7 @@
 
             <div class="pagination">
                 <?php if ($page > 1): ?>
-                    <a class="page-link" href="?page=<?php echo $page - 1; ?>">&laquo; Previous</a>
+                    <a class="page-link" href="?page=<?php echo $page - 1; ?>&search=<?php echo urlencode($search_query); ?>">&laquo; Previous</a>
                 <?php endif; ?>
 
                 <?php 
@@ -95,18 +101,18 @@
                 }
 
                 if ($start_page > 1) {
-                    echo '<a class="page-link" href="?page=1">1</a>';
+                    echo '<a class="page-link" href="?page=1&search=' . urlencode($search_query) . '">1</a>';
                     if ($start_page > 2) echo '<span class="page-ellipsis">...</span>';
                 }
 
                 for ($i = $start_page; $i <= $end_page; $i++): ?>
-                    <a class="page-link <?php echo $i == $page ? 'active' : ''; ?>" href="?page=<?php echo $i; ?>">
+                    <a class="page-link <?php echo $i == $page ? 'active' : ''; ?>" href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search_query); ?>">
                         <?php echo $i; ?>
                     </a>
                 <?php endfor; ?>
 
                 <?php if ($page < $total_pages): ?>
-                    <a class="page-link" href="?page=<?php echo $page + 1; ?>">Next &raquo;</a>
+                    <a class="page-link" href="?page=<?php echo $page + 1; ?>&search=<?php echo urlencode($search_query); ?>">Next &raquo;</a>
                 <?php endif; ?>
             </div>
         </main>
@@ -130,8 +136,6 @@
                     activeRow = row.classList.contains('active-row') ? row : null;
                 });
             });
-
-            window.scrollTo(0, document.body.scrollHeight);
         });
     </script>
 </body>
