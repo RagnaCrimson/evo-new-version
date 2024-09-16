@@ -17,7 +17,7 @@
         <header>
             <h1>ข้อมูลของหน่วยงาน</h1>
         </header>
-        <!-- ที่แสดงข้อมูล -->
+        
         <main>
             <table class="data-table">
                 <thead>
@@ -27,20 +27,20 @@
                         <th>จังหวัด</th>
                         <th>อำเภอ</th>
                         <th>ตำบล</th>
-                        <th>ค่าไฟ/เดือน</th>
+                        <th>ค่าไฟ/เดือน (บาท)</th>
                         <th>ไฟล์เอกสาร</th>
                         <th>ทีมฝ่ายขาย</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php while ($row = $resultdatastore_db->fetch_assoc()): ?>
-                        <tr>
+                        <tr class="clickable-row">
                             <td><?php echo htmlspecialchars($row['V_ID']); ?></td>
                             <td><?php echo htmlspecialchars($row['V_Name']); ?></td>
                             <td><?php echo htmlspecialchars($row['V_Province']); ?></td>
                             <td><?php echo htmlspecialchars($row['V_District']); ?></td>
                             <td><?php echo htmlspecialchars($row['V_SubDistrict']); ?></td>
-                            <td><?php echo htmlspecialchars($row['V_Electric_per_month']); ?></td>
+                            <td><?php echo ($row["V_Electric_per_month"] == 0) ? 'N/A' : number_format($row["V_Electric_per_month"], 2); ?> </td>
                             <td>
                                 <?php if (!empty($row['filename'])): ?>
                                     <a href="../uploads/<?php echo htmlspecialchars($row['filename']); ?>" target="_blank">
@@ -52,18 +52,34 @@
                             </td>
                             <td><?php echo htmlspecialchars($row['V_Sale']); ?></td>
                         </tr>
+                        <tr class="extra-row">
+                            <td colspan="2">
+                                หมายเลขผู้ใช้ไฟ : <?php echo htmlspecialchars($row['CA_code']); ?><br>
+                                วันที่รับเอกสาร : <?php echo date('d-m-Y', strtotime($row["V_Date"])); ?><br>
+                            </td>
+                            <td colspan="4">
+                                <strong>รายละเอียดเพิ่มเติม:</strong><br>
+                                ชื่อผู้บริหาร : <?php echo htmlspecialchars($row['V_ExecName']); ?><br>
+                                เบอร์ผู้บริหาร : <?php echo htmlspecialchars($row['V_ExecPhone']); ?><br>
+                                Email : <?php echo htmlspecialchars($row['V_ExecMail']); ?><br>
+                            </td>
+                            <td colspan="4">
+                                ชื่อผู้ประสานงาน : <?php echo htmlspecialchars($row["V_CoordName1"]); ?><br>
+                                เบอร์โทร : <?php echo htmlspecialchars($row["V_CoordPhone1"]); ?><br>
+                                Email : <?php echo htmlspecialchars($row["V_CoordMail1"]); ?><br>
+                            </td>
+                        </tr>
                     <?php endwhile; ?>
                 </tbody>
             </table>
 
-            <!-- ที่กดเปลี่ยนหน้า -->
             <div class="pagination">
                 <?php if ($page > 1): ?>
                     <a class="page-link" href="?page=<?php echo $page - 1; ?>">&laquo; Previous</a>
                 <?php endif; ?>
 
                 <?php 
-                $max_pages_to_show = 20; // Maximum number of pages to show
+                $max_pages_to_show = 20;
                 $half_max = floor($max_pages_to_show / 2);
 
                 $start_page = max(1, $page - $half_max);
@@ -78,7 +94,6 @@
                     }
                 }
 
-                // Display page numbers
                 if ($start_page > 1) {
                     echo '<a class="page-link" href="?page=1">1</a>';
                     if ($start_page > 2) echo '<span class="page-ellipsis">...</span>';
@@ -97,22 +112,27 @@
         </main>
     </div>
 
-    <!-- เปลี่ยนหน้าแล้วไม่เด้ง -->
+    <?php include '../footer.php'; ?>
+    
     <script>
-    function loadPage(page) {
-        const url = window.location.href.split('?')[0] + '?page=' + page;
-        fetch(url)
-            .then(response => response.text())
-            .then(html => {
-                document.body.innerHTML = html;
-                window.scrollTo(0, document.body.scrollHeight);
-            })
-            .catch(error => console.log(error));
-    }
+        document.addEventListener('DOMContentLoaded', function() {
+            const rows = document.querySelectorAll('.clickable-row');
+            let activeRow = null;
 
-    document.addEventListener("DOMContentLoaded", function() {
-        window.scrollTo(0, document.body.scrollHeight);
-    });
+            rows.forEach(function(row) {
+                row.addEventListener('click', function() {
+                    if (activeRow && activeRow !== row) {
+                        activeRow.classList.remove('active-row');
+                    }
+
+                    row.classList.toggle('active-row');
+
+                    activeRow = row.classList.contains('active-row') ? row : null;
+                });
+            });
+
+            window.scrollTo(0, document.body.scrollHeight);
+        });
     </script>
 </body>
 </html>

@@ -11,10 +11,14 @@ body {
     background-color: #f0f0f0;
     color: #333;
     line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .container {
-    max-width: 1200px;
+    flex: 1;
+    max-width: calc(100% - 250px); /* Adjust width to account for sidebar */
     margin: 20px auto;
     padding: 20px;
     background: #fff;
@@ -25,19 +29,11 @@ body {
 header {
     text-align: center;
     margin-bottom: 30px;
-    width: 120%;
-}
-
-header h1 {
-    color: #333;
-    font-size: 3em;
-    margin-bottom: 10px;
-    font-weight: 700;
 }
 
 /* Table styling */
 .data-table {
-    width: 120%;
+    width: 100%; /* Adjust to fit within container */
     border-collapse: collapse;
     margin-bottom: 20px;
 }
@@ -53,7 +49,6 @@ header h1 {
     text-align: left;
 }
 
-/* Ensuring header and columns fit the table width */
 .data-table th {
     text-align: center;
 }
@@ -81,6 +76,8 @@ header h1 {
     color: #007bff;
     text-decoration: none;
     font-weight: 500;
+    width: 40px;
+    text-align: center;
 }
 
 .page-link:hover {
@@ -102,4 +99,21 @@ header h1 {
     margin: 0 5px;
     padding: 10px 15px;
     color: #007bff;
+}
+
+/* Extra row styling */
+.extra-row {
+    display: none;
+}
+.active-row + .extra-row {
+    display: table-row;
+}
+
+/* Footer styling */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
 }
