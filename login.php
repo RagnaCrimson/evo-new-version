@@ -4,7 +4,7 @@ session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "db_evo";
+$dbname = "datastore_db";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

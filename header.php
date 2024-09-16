@@ -31,19 +31,19 @@ $objConnect->close();
 <body>
     <div class="sidebar">
         <div class="brand">
-            <img src="../img/admin.png" alt="Logo">
+            <img src="/newevo/img/admin.png" alt="Logo">
             <span><?php echo $_SESSION['name']; ?></a></span>
         </div>
-        <a href="dashboard_admin.php">Dashboard</a>
+        <a href="/newevo/dashboard_admin.php">Dashboard</a>
 
         <div class="dropdown">
             <button class="dropdown-btn">รายการ 
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <a href="list/data_view.php">ดูข้อมูลทั้งหมด</a>
-                <a href="list/insert_data.php">เพิ่มข้อมูล</a>
-                <a href="list/status_view.php">ดูสถานะ</a>
+                <a href="/newevo/list/data_view.php">ดูข้อมูลทั้งหมด</a>
+                <a href="/newevo/list/insert_data.php">เพิ่มข้อมูล</a>
+                <a href="/newevo/list/status_view.php">ดูสถานะ</a>
             </div>
         </div>
 
@@ -52,13 +52,13 @@ $objConnect->close();
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <a href="report/reportday.php">เลือกวันที่</a>
-                <a href="report/allname.php" target="_blank">รายชื่อทั้งหมด</a>
-                <a href="report/sale_name.php">เลือกทีมฝ่ายขาย</a>
+                <a href="/newevo/report/reportday.php">เลือกวันที่</a>
+                <a href="/newevo/report/allname.php" target="_blank">รายชื่อทั้งหมด</a>
+                <a href="/newevo/report/sale_name.php">เลือกทีมฝ่ายขาย</a>
             </div>
         </div>
 
-        <a onclick="confirmLogout()">ลงชื่ออก</a>
+        <a href="#" onclick="confirmLogout()">ลงชื่อออก</a>
     </div>
 
     <script>

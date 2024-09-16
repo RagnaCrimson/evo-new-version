@@ -23,7 +23,7 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required aria-required="true">
             </div>
-            <button type="button" class="btn btn-primary btn-block" onclick="login()">Sign in</button>
+            <button type="submit" class="btn btn-primary btn-block" onclick="login()">Sign in</button>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
