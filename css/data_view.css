@@ -121,6 +121,9 @@ footer {
 
 /* search */
 .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 
@@ -150,3 +153,8 @@ footer {
     background-color: #0056b3;
 }
 
+.total-count {
+    padding: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}

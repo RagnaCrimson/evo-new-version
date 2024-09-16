@@ -1,4 +1,4 @@
-<?php include '../fetch_data.php'; ?>
+<?php include 'fetch_data.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +24,9 @@
                     <input type="text" name="search" placeholder="ค้นหาหน่วยงาน..." value="<?php echo htmlspecialchars($search_query); ?>">
                     <button type="submit">ค้นหา</button>
                 </form>
+            </div>
+            <div class="total-count">
+                <p>Total Records: <?php echo htmlspecialchars($total_rows); ?></p>
             </div>
             <table class="data-table">
                 <thead>
