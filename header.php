@@ -52,7 +52,6 @@ $objConnect->close();
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <a href="/newevo/report/reportday.php">เลือกวันที่</a>
                 <a href="/newevo/report/allname.php" target="_blank">รายชื่อทั้งหมด</a>
                 <a href="/newevo/report/sale_name.php">เลือกทีมฝ่ายขาย</a>
             </div>

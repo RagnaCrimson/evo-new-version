@@ -14,10 +14,8 @@ try {
 
     $objConnect->set_charset("utf8");
 
-    // Fetch search query
     $search_query = isset($_GET['search']) ? trim($_GET['search']) : '';
 
-    // Prepare SQL query with search condition
     $sql = "SELECT * FROM view WHERE V_Name LIKE ? OR V_Province LIKE ?";
     $stmt = $objConnect->prepare($sql);
     $search_param = "%{$search_query}%";
@@ -25,12 +23,10 @@ try {
     $stmt->execute();
     $resultdatastore_db = $stmt->get_result();
 
-    // Pagination setup
     $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
     $rows_per_page = 20;
     $offset = ($page - 1) * $rows_per_page;
 
-    // Prepare SQL for total rows
     $stmt_total = $objConnect->prepare("SELECT COUNT(*) AS total FROM view WHERE V_Name LIKE ? OR V_Province LIKE ?");
     $stmt_total->bind_param('ss', $search_param, $search_param);
     $stmt_total->execute();
@@ -40,7 +36,6 @@ try {
 
     $total_pages = ceil($total_rows / $rows_per_page);
 
-    // Prepare SQL for data with pagination
     $stmt_data = $objConnect->prepare("SELECT view.*, files.filename, peak.serial_number, peak.CA_code 
                                        FROM view 
                                        LEFT JOIN files ON view.V_ID = files.ID 

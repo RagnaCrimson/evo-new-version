@@ -39,6 +39,7 @@
                         <th>ค่าไฟ/เดือน (บาท)</th>
                         <th>ไฟล์เอกสาร</th>
                         <th>ทีมฝ่ายขาย</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,6 +61,9 @@
                                 <?php endif; ?>
                             </td>
                             <td><?php echo htmlspecialchars($row['V_Sale']); ?></td>
+                            <td>
+                                <a href="edit_data.php?V_ID=<?php echo urlencode($row['V_ID']); ?>" class="btn btn-primary">Edit</a>
+                            </td>
                         </tr>
                         <tr class="extra-row">
                             <td colspan="2">
