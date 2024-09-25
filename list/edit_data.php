@@ -7,6 +7,7 @@
     <link href="../css/dashboard_styles.css" rel="stylesheet">
     <link href="../css/custom-select.css" rel="stylesheet">
     <link href="../css/edit.css" rel="stylesheet">
+    <script src="../js/logout.js"></script>
 </head>
 <body>
     <?php include '../header.php'; ?>

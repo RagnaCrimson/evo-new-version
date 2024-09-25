@@ -5,10 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Data</title>
+    <title>แสดงข้อมูล</title>
     <link href="../css/dashboard_styles.css" rel="stylesheet">
     <link href="../css/custom-select.css" rel="stylesheet">
     <link href="../css/data_view.css" rel="stylesheet">
+    <script src="../js/logout.js"></script>
 </head>
 <body>
     <?php include '../header.php'; ?>
@@ -24,9 +25,8 @@
                     <input type="text" name="search" placeholder="ค้นหาหน่วยงาน..." value="<?php echo htmlspecialchars($search_query); ?>">
                     <button type="submit">ค้นหา</button>
                 </form>
-            </div>
-            <div class="total-count">
-                <p>Total Records: <?php echo htmlspecialchars($total_rows); ?></p>
+                <p>หน่วยงานทั้งหมด : <?php echo htmlspecialchars($total_rows); ?></p>
+                <a href="?act=excel&sale=<?php echo urlencode($saleFilter); ?>&province=<?php echo urlencode($provinceFilter); ?>&status=<?php echo urlencode($statusFilter); ?>" class="btn btn-primary">Export to Excel</a>
             </div>
             <table class="data-table">
                 <thead>
@@ -37,7 +37,7 @@
                         <th>อำเภอ</th>
                         <th>ตำบล</th>
                         <th>ค่าไฟ/เดือน (บาท)</th>
-                        <th>ไฟล์เอกสาร</th>
+                        <th>หนังสือตอบรับ</th>
                         <th>ทีมฝ่ายขาย</th>
                         <th>Actions</th>
                     </tr>
@@ -67,19 +67,22 @@
                         </tr>
                         <tr class="extra-row">
                             <td colspan="2">
+                                <b>สถานะงาน : <?php echo htmlspecialchars($row['T_Status']); ?></b><br>
                                 หมายเลขผู้ใช้ไฟ : <?php echo htmlspecialchars($row['CA_code']); ?><br>
                                 วันที่รับเอกสาร : <?php echo date('d-m-Y', strtotime($row["V_Date"])); ?><br>
                             </td>
-                            <td colspan="4">
-                                <strong>รายละเอียดเพิ่มเติม:</strong><br>
+                            <td colspan="3">
                                 ชื่อผู้บริหาร : <?php echo htmlspecialchars($row['V_ExecName']); ?><br>
                                 เบอร์ผู้บริหาร : <?php echo htmlspecialchars($row['V_ExecPhone']); ?><br>
                                 Email : <?php echo htmlspecialchars($row['V_ExecMail']); ?><br>
                             </td>
-                            <td colspan="4">
+                            <td colspan="2">
                                 ชื่อผู้ประสานงาน : <?php echo htmlspecialchars($row["V_CoordName1"]); ?><br>
                                 เบอร์โทร : <?php echo htmlspecialchars($row["V_CoordPhone1"]); ?><br>
                                 Email : <?php echo htmlspecialchars($row["V_CoordMail1"]); ?><br>
+                            </td>
+                            <td colspan="2">
+                                <a href="document/document.php?V_ID=<?php echo urlencode($row['V_ID']); ?>" class="btn btn-info">เอกสาร</a>
                             </td>
                         </tr>
                     <?php endwhile; ?>
