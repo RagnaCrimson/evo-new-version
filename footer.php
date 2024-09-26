@@ -1,7 +1,7 @@
 <!-- footer.php -->
 <footer>
     <p>&copy; <?php echo date("Y"); ?> Evolution Energy Tech Co. All rights reserved.  |  create by : Chantip Chaipakdee</p>
-    <p><a href="privacy_policy.php">Privacy Policy</a> | <a href="terms_of_service.php">Terms of Service</a></p>
+    <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
 </footer>
 
 <style>

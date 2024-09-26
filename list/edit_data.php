@@ -7,7 +7,7 @@
     <link href="../css/dashboard_styles.css" rel="stylesheet">
     <link href="../css/custom-select.css" rel="stylesheet">
     <link href="../css/edit.css" rel="stylesheet">
-    <script src="../js/logout.js"></script>
+    <script src="../js/script.js"></script>
 </head>
 <body>
     <?php include '../header.php'; ?>
@@ -94,7 +94,7 @@
                 <?php endif; ?>
             </div>
             <input type="hidden" name="V_ID" value="<?php echo htmlspecialchars($V_ID); ?>">
-            <button type="submit" name="submit">Update</button>
+            <button type="submit" name="submit" class="btn btn-info">Update</button>
         </form>
     </div>
 </body>

@@ -3,6 +3,8 @@ session_start();
 
 include 'connect.php';
 
+require_once 'session.php';
+
 $username = $_SESSION['username'];
 $sql = "SELECT Name FROM admin WHERE UserName='$username'";
 $result = $objConnect->query($sql);
@@ -26,7 +28,7 @@ $objConnect->close();
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard_styles.css" rel="stylesheet">
     <link href="css/custom-select.css" rel="stylesheet">
-    <script src="js/logout.js"></script>
+    <script src="js/script.js"></script>
 </head>
 <body>
     <div class="sidebar">
@@ -41,8 +43,8 @@ $objConnect->close();
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <a href="/newevo/list/data_view.php">ดูข้อมูลทั้งหมด</a>
                 <a href="/newevo/list/insert_data.php">เพิ่มข้อมูล</a>
+                <a href="/newevo/list/data_view.php">ดูข้อมูลทั้งหมด</a>
                 <a href="/newevo/list/status_view.php">ดูสถานะ</a>
             </div>
         </div>

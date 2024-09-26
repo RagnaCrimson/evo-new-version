@@ -28,8 +28,6 @@ if ($result->num_rows > 0) {
     }
     
     $response = array('success' => true, 'redirectUrl' => $redirectUrl);
-} else {
-    $response = array('success' => false, 'message' => 'Login failed. Please check your username and password.');
 }
 
 $conn->close();

@@ -9,7 +9,7 @@
     <link href="../css/dashboard_styles.css" rel="stylesheet">
     <link href="../css/custom-select.css" rel="stylesheet">
     <link href="../css/data_view.css" rel="stylesheet">
-    <script src="../js/logout.js"></script>
+    <script src="../js/script.js"></script>
 </head>
 <body>
     <?php include '../header.php'; ?>

@@ -6,7 +6,7 @@
     <title>Login</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/login_styles.css" rel="stylesheet">
-    <script src="js/login_script.js"></script>
+    <script src="js/script.js"></script>
 </head>
 <body>
     <div class="login-container">

@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-doughnutlabel@1.0.0"></script>
     <link href="css/dashboard_styles.css" rel="stylesheet">
+    <script src="js/script.js"></script>
 </head>
 <body>
     <?php include 'sort_by.php';?>
