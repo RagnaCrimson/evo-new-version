@@ -137,17 +137,18 @@
             </div>
         </form>
     </div>
-    <script>
-        function confirmReset(event) {
-            if (!confirm("ต้องการที่จะล้างข้อมูลหรือไม่?")) {
-                event.preventDefault();
-            }
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+<script>
+    function confirmReset(event) {
+        if (!confirm("ต้องการที่จะล้างข้อมูลหรือไม่?")) {
+            event.preventDefault();
         }
-    </script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script>
+    }
+    
     // check dup
     $(document).ready(function() {
         $('#V_Name').on('input', function() {
@@ -160,7 +161,7 @@
                     dataType: 'json',
                     success: function(response) {
                         if (response.exists) {
-                            $('#duplicateMessage').text('มีหน่วยงานนี้ในระบบแล้ว.').show();
+                            $('#duplicateMessage').text('มีหน่วยงานนี้ในระบบแล้ว').show();
                         } else {
                             $('#duplicateMessage').text('').hide();
                         }
@@ -225,5 +226,6 @@
         });
     });
     </script>
+    <?php include '../footer.php'; ?>
 </body>
 </html>

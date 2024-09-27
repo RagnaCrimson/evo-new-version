@@ -28,7 +28,7 @@ function login() {
 
 // logout
 function confirmLogout() {
-    var confirmed = confirm("Are you sure you want to logout?");
+    var confirmed = confirm("ต้องการออกจากระบบหรือไม่?");
     if (confirmed) {
         window.location.href = "logout.php";
     }

@@ -84,3 +84,8 @@ h1 {
 .suggestions-container li:hover {
     background-color: #f0f0f0;
 }
+
+#duplicateMessage {
+    color: red;
+    display: none; /* Hidden by default */
+}

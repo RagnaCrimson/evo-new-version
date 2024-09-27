@@ -2,7 +2,6 @@
 session_start();
 
 include 'connect.php';
-
 require_once 'session.php';
 
 $username = $_SESSION['username'];
@@ -13,10 +12,9 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $_SESSION['name'] = $row['Name'];
 } else {
-    echo "Name not found.";
+    error_log("Name not found for user $username");
+    $_SESSION['name'] = "Unknown User";
 }
-
-$objConnect->close();
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +22,6 @@ $objConnect->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Header</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard_styles.css" rel="stylesheet">
     <link href="css/custom-select.css" rel="stylesheet">
@@ -34,7 +31,7 @@ $objConnect->close();
     <div class="sidebar">
         <div class="brand">
             <img src="/newevo/img/admin.png" alt="Logo">
-            <span><?php echo $_SESSION['name']; ?></a></span>
+            <span><?php echo htmlspecialchars($_SESSION['name']); ?></span>
         </div>
         <a href="/newevo/dashboard_admin.php">Dashboard</a>
 

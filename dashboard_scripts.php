@@ -36,6 +36,14 @@
         </div>
         <div class="col-md-6">
             <div class="card">
+                <div class="card-header">ภูมิภาคหน่วยงาน</div>
+                <div class="card-body">
+                    <canvas id="pieChart5"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
                 <div class="card-header">ค่าไฟต่อปี</div>
                 <div class="card-body">
                     <canvas id="pieChart3"></canvas>
@@ -47,14 +55,6 @@
                 <div class="card-header">ค่าไฟต่อเดือน</div>
                 <div class="card-body">
                     <canvas id="pieChart4"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">ค่าไฟต่อเดือน</div>
-                <div class="card-body">
-                    <canvas id="pieChart5"></canvas>
                 </div>
             </div>
         </div>
@@ -333,7 +333,7 @@
                     label: 'Regions',
                     data: regionCounts,
                     backgroundColor: [
-                        '#FF6384', '#36A2EB', '#FFCE56', '#FF5733', '#C70039', '#900C3F'
+                        '#d35400', '#138d75', '#FFCE56', '#5499c7', '#2e4053', '#900C3F'
                     ]
                 }]
             },
