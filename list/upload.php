@@ -1,5 +1,5 @@
 <?php
-include 'connect.php';
+include '../connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES["file"]) && $_FILES["file"]["error"] == 0) {
@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $objConnect->commit();
 
                         echo "The file " . htmlspecialchars(basename($_FILES["file"]["name"])) . " has been uploaded and data has been inserted.";
-                        header("Location: index.php");
+                        header("Location: insert_data.php");
                         exit();
 
                     } else {
