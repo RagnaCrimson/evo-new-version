@@ -36,24 +36,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $sale = htmlspecialchars($_POST['V_Sale']);
                     $date = htmlspecialchars($_POST['V_Date']);
                     $electric_per_month = htmlspecialchars($_POST['V_Electric_per_month']);
-                    $vPeakMonth = htmlspecialchars($_POST['V_Peak_month']);
                     $comment = htmlspecialchars($_POST['V_comment']);
                     $location = htmlspecialchars($_POST['V_location']);
                     $status = htmlspecialchars($_POST['T_Status']);
 
+                    // Automatically determine the region based on province
+                    $regions = [
+                        'ภาคเหนือ' => ['เชียงราย', 'น่าน', 'พะเยา', 'เชียงใหม่', 'แม่ฮ่องสอน', 'แพร่', 'ลำปาง', 'ลำพูน', 'อุตรดิตถ์'],
+                        'ภาคกลาง' => ['กรุงเทพมหานคร', 'พิษณุโลก', 'สุโขทัย', 'เพชรบูรณ์', 'พิจิตร', 'กำแพงเพชร', 'นครสวรรค์', 'ลพบุรี', 'ชัยนาท', 'อุทัยธานี', 'สิงห์บุรี', 'อ่างทอง', 'สระบุรี', 'พระนครศรีอยุธยา', 'สุพรรณบุรี', 'นครนายก', 'ปทุมธานี', 'นนทบุรี', 'นครปฐม', 'สมุทรปราการ', 'สมุทรสาคร', 'สมุทรสงคราม'],
+                        'ภาคตะวันออกเฉียงเหนือ' => ['หนองคาย', 'นครพนม', 'สกลนคร', 'อุดรธานี', 'หนองบัวลำภู', 'เลย', 'มุกดาหาร', 'กาฬสินธุ์', 'ขอนแก่น', 'อำนาจเจริญ', 'ยโสธร', 'ร้อยเอ็ด', 'มหาสารคาม', 'ชัยภูมิ', 'นครราชสีมา', 'บุรีรัมย์', 'สุรินทร์', 'ศรีสะเกษ', 'อุบลราชธานี'],
+                        'ภาคตะวันออก' => ['สระแก้ว', 'ปราจีนบุรี', 'ฉะเชิงเทรา', 'ชลบุรี', 'ระยอง', 'จันทบุรี', 'ตราด'],
+                        'ภาคตะวันตก' => ['ตาก', 'กาญจนบุรี', 'ราชบุรี', 'เพชรบุรี', 'ประจวบคีรีขันธ์'],
+                        'ภาคใต้' => ['ชุมพร', 'ระนอง', 'สุราษฎร์ธานี', 'นครศรีธรรมราช', 'กระบี่', 'พังงา', 'ภูเก็ต', 'พัทลุง', 'ตรัง', 'ปัตตานี', 'สงขลา', 'สตูล', 'นราธิวาส', 'ยะลา']
+                    ];
+
+                    $region = '';
+                    foreach ($regions as $key => $provinces) {
+                        if (in_array($province, $provinces)) {
+                            $region = $key;
+                            break;
+                        }
+                    }
+
+                    if (empty($region)) {
+                        throw new Exception("Province not found in any region");
+                    }
+
                     // Insert into view table
-                    $sql_view = "INSERT INTO view (V_Name, V_Province, V_District, V_SubDistrict, V_ExecName, V_ExecPhone, V_ExecMail, 
+                    $sql_view = "INSERT INTO view (V_Name, V_Province, V_Region, V_District, V_SubDistrict, V_ExecName, V_ExecPhone, V_ExecMail, 
                                                 V_CoordName1, V_CoordPhone1, V_CoordMail1, V_Sale, V_Date, 
-                                                V_Electric_per_year, V_Electric_per_month, V_Peak_year, V_Peak_month, V_comment, V_location) 
+                                                V_Electric_per_year, V_Electric_per_month, V_Peak_year, V_comment, V_location) 
                                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     $stmt_view = $objConnect->prepare($sql_view);
                     if ($stmt_view === false) {
                         throw new Exception("Error preparing statement for view table: " . $objConnect->error);
                     }
 
-                    $stmt_view->bind_param("ssssssssssssssssss", $name, $province, $district, $sub_district, $exec_name, $exec_phone, $exec_mail, 
+                    $stmt_view->bind_param("ssssssssssssssssss", $name, $province, $region, $district, $sub_district, $exec_name, $exec_phone, $exec_mail, 
                                             $coord_name1, $coord_phone1, $coord_mail1, $sale, $date, 
-                                            $electric_per_year, $electric_per_month, $vPeakYear, $vPeakMonth, $comment, $location);
+                                            $electric_per_year, $electric_per_month, $vPeakYear, $comment, $location);
 
                     if ($stmt_view->execute()) {
                         $last_id = $stmt_view->insert_id;
